@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+        .container {
+            min-height: 100%;
+            align-items: center;
+        }
+        #corpus {
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .typing-section {
+            margin: 25px;
+        }
+        .input {
+            margin-top: 25px;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="typing-section grey darken-3">
+                <div class="text-content white" id="text-content">
+                </div>
+                <div class="input">
+                    <input type="text" class="col s11" id="input-field">
+                    <button class="btn col s1" id="redo">Redo</button>
+                </div>
+            </div>
+        </div>
+        <div class="result center-align">
+            <p>Raw CPM: <span id="final-cpm">x</span></p>
+            <p>Adjusted CPM: <span id="adjust-cpm">x</span></p>
+            <p>WPM: <span id="final-wpm">x</span></p>
+            <p>Acc: <span id="acc">x</span></p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        M.AutoInit();
+    </script>
+</body>
+</html>
