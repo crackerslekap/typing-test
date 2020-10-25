@@ -10,15 +10,28 @@ for (var l = 0; l < text.length; l++) {
 shuffle(text);
 for (var n = 0; n < text.length; n++) {
     let parent = document.getElementById("text-content");
-    var r = Math.random().toString(36).substring(7);
     var current = text[n];
     var newElem = document.createElement("span");
-    newElem.setAttribute("id", r);
     newElem.setAttribute("id", "corpus");
+    newElem.setAttribute("class", "corpus");
     newElem.innerHTML = current + " ";
     parent.appendChild(newElem);
 }
-//
+/*
+var toTruncate = 125;
+var arrList = [];
+var items = document.querySelectorAll(".corpus");
+for (var k = 0; k < items.length; k++) {
+    arrList.push(items[k].innerHTML);
+}
+arrList = arrList.toString();
+arrList = truncate(arrList, toTruncate, true);
+arrList = arrList.split(',');
+for (var p = 0; p < items.length; p++) {
+    items[p].innerHTML = arrList[p];
+}
+console.log(arrList);
+*/
 
 //TRUNCATE FUNCTION (UNUSED)
 function truncate(str, maxLength, useWordBoundary) {
@@ -34,12 +47,9 @@ function truncate(str, maxLength, useWordBoundary) {
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue, randomIndex;
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
@@ -74,10 +84,10 @@ var incorrect = 0;
 var lengthOfIncorrect = 0;
 var durationSetting;
 
-var fifteens = document.getElementById("15");
-var thirtys = document.getElementById("30");
-var sixtys = document.getElementById("60");
-var onetwentys = document.getElementById("120");
+const fifteens = document.getElementById("15");
+const thirtys = document.getElementById("30");
+const sixtys = document.getElementById("60");
+const onetwentys = document.getElementById("120");
 
 //100% sure there's a better way to do this but can't get anything else to work
 fifteens.onclick = () => {
@@ -152,6 +162,18 @@ function accMod() {
         nodes[i].style.color = "#C62828";
         incorrect++;
         lengthOfIncorrect += text[i].length;
+    }
+    //also 100% sure there is a better way to do this but I can't figure anything else out :(
+    if (i % 25 === 0 && i != 0 && i != 1) {
+        const tsection = document.querySelector(".typing-section");
+        const getStyle = getComputedStyle(tsection);
+        var current = getStyle.height;
+        current = current.replace("px", "");
+        current = Number(current);
+        current = current + 22.5;
+        current = current.toString();
+        current = current + "px";
+        tsection.style.height = current;
     }
     i++;
     submitted.push(inputField.value);
