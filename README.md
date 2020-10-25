@@ -6,8 +6,6 @@ todo:
 
 implement a caret/cursor on the word list
 
-allow user to modify test duration
-
 truncate text and allow new lines to appear
 
 make word list infinite/repeat word list for long duration typing tests
