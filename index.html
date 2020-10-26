@@ -49,16 +49,37 @@
         #modal-signup, #modal-login {
             width: 25%;
         }
+        .transparentpls {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .transparentpls button {
+            margin: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: inherit; 
+        }
+        #raw, #adjusted {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <!--<div class="center-align">
+            <!--
+            <div class="center-align">
                 <h1 id="to-hide">SELECT DURATION</h1>
             </div>
-        -->
+            -->
             <div class="typing-section grey darken-3">
+                <div id="preview" class="transparentpls">
+                    <button class="raw-wpm btn-large btn-flat grey lighten-1">Raw WPM: <span style="font-size: 24px" id="raw"></span></button>
+                    <button class="adjusted-wpm btn-large btn-flat grey lighten-1">WPM: <span style="font-size: 24px" id="adjusted"></span></button>
+                </div>
                 <div class="text-content white" id="text-content">
                 </div>
                 <div class="input">

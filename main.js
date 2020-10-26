@@ -123,28 +123,28 @@ document.addEventListener("DOMContentLoaded", () => {
     var durationVal = Number(localStorage.getItem("duration"));
     console.log(durationVal);
     if(durationVal == 15) {
-        fifteens.setAttribute("class", "btn-large waves-effect waves-light grey");
+        fifteens.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
         thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         sixtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         onetwentys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         inputField.disabled = false;
         inputField.focus();
     } else if(durationVal == 30) {
-        thirtys.setAttribute("class", "btn-large waves-effect waves-light grey");
+        thirtys.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
         sixtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         fifteens.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         onetwentys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         inputField.disabled = false;
         inputField.focus();
     } else if(durationVal == 60) {
-        sixtys.setAttribute("class", "btn-large waves-effect waves-light grey");
+        sixtys.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
         thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         fifteens.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         onetwentys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         inputField.disabled = false;
         inputField.focus();
     } else if(durationVal == 120) {
-        onetwentys.setAttribute("class", "btn-large waves-effect waves-light grey");
+        onetwentys.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
         sixtys.setAttribute("class", "btn-large waves-effect waves-light lighten-1");
         thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
         fifteens.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //100% sure there's a better way to do this but can't get anything else to work
 fifteens.onclick = () => {
-    fifteens.setAttribute("class", "btn-large waves-effect waves-light grey");
+    fifteens.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
     thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     sixtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     onetwentys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
@@ -166,7 +166,7 @@ fifteens.onclick = () => {
     inputField.focus();
 }
 thirtys.onclick = () => {
-    thirtys.setAttribute("class", "btn-large waves-effect waves-light grey");
+    thirtys.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
     sixtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     fifteens.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     onetwentys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
@@ -177,7 +177,7 @@ thirtys.onclick = () => {
     inputField.focus();
 }
 sixtys.onclick = () => {
-    sixtys.setAttribute("class", "btn-large waves-effect waves-light grey");
+    sixtys.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
     thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     fifteens.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     onetwentys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
@@ -188,7 +188,7 @@ sixtys.onclick = () => {
     inputField.focus();
 }
 onetwentys.onclick = () => {
-    onetwentys.setAttribute("class", "btn-large waves-effect waves-light grey");
+    onetwentys.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
     sixtys.setAttribute("class", "btn-large waves-effect waves-light lighten-1");
     thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
     fifteens.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
@@ -199,12 +199,14 @@ onetwentys.onclick = () => {
     inputField.focus();
 }
 
+var chungus;
+
 function start() {
     inputField.removeEventListener("keypress", start);
     console.log("before");
     inputField.addEventListener("keypress", check);
     var timer = durationSetting * 1000;
-    var chungus = durationSetting;
+    chungus = durationSetting;
     var countdown = setInterval(function () {
         chungus--;
         document.getElementById("countdown").innerHTML = chungus;
@@ -257,6 +259,19 @@ function accMod() {
     inputField.value.replace(/\s+/g, '');
 }
 
+var realWPM;
+var adjustWPM;
+
+$(document).keydown(function (k) {
+        realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
+        realWPM = realCPM / 5;
+        adjustCPM = realCPM - lengthOfIncorrect;
+        adjustWPM = adjustCPM / 5;
+        adjustWPM = Math.round(adjustWPM);
+        $('#raw').html(realWPM);
+        $('#adjusted').html(adjustWPM);
+    })
+
 function calc() {
     const tsection = document.querySelector(".text-content");
     const input = document.querySelector(".input");
@@ -269,15 +284,7 @@ function calc() {
     console.log(withoutSpace);
     var string = submitted.toString();
     string = string.replace(/,/g, ' ');
-    if (durationSetting == 15) {
-        cpm = string.length * 4;
-    } else if (durationSetting == 30) {
-        cpm = string.length * 2;
-    } else if (durationSetting == 60) {
-        cpm = string.length;
-    } else if (durationSetting == 120) {
-        cpm = string.length / 2;
-    }
+    cpm = string.length * 60 / durationSetting;
 
     var acc = (incorrect / correct) * 100;
     var toModify;
@@ -314,6 +321,8 @@ function calc() {
     wpmDisplay.innerHTML = wpm;
     cpmDisplay.innerHTML = cpm;
     adjustDisplay.innerHTML = adjustedCpm;
-    
+
+    $("#preview").css("display", "none");
+
     document.getElementById("text-content").style.display = "none";
 }
