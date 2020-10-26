@@ -17,6 +17,7 @@ for (var n = 0; n < text.length; n++) {
     newElem.innerHTML = current + " ";
     parent.appendChild(newElem);
 }
+
 /*
 var toTruncate = 125;
 var arrList = [];
@@ -63,7 +64,7 @@ const wpmDisplay = document.getElementById("final-wpm");
 const cpmDisplay = document.getElementById("final-cpm");
 const adjustDisplay = document.getElementById("adjust-cpm");
 const accDisplay = document.getElementById("acc");
-const redo = document.getElementById("redo");
+//const redo = document.getElementById("redo");
 const countdown = document.getElementById("countdown");
 const tohide = document.getElementById("to-hide");
 
@@ -71,9 +72,14 @@ inputField.disabled = true;
 inputField.value = "";
 
 inputField.addEventListener("keypress", start);
+$("#redo").on("click", () => {
+    window.location.reload();
+})
+/*
 redo.addEventListener("click", () => {
     window.location.reload();
 })
+*/
 
 var submitted = [];
 
@@ -170,10 +176,16 @@ function accMod() {
         var current = getStyle.height;
         current = current.replace("px", "");
         current = Number(current);
-        current = current + 22.5;
-        current = current.toString();
-        current = current + "px";
-        tsection.style.height = current;
+        if(current < 500) {
+            current = current + 25.75;
+            current = current.toString();
+            current = current + "px";
+            const currentHeight = $(".typing-section").css("height");
+            console.log(currentHeight);
+            tsection.style.height = current;
+        } else {
+            current = current;
+        }
     }
     i++;
     submitted.push(inputField.value);
@@ -182,6 +194,8 @@ function accMod() {
 }
 
 function calc() {
+    const tsection = document.querySelector(".text-content");
+    const input = document.querySelector(".input");
     var withoutSpace = inputField.value;
     withoutSpace = withoutSpace.replace(/\s/g, "");
     console.log(withoutSpace);
@@ -204,6 +218,9 @@ function calc() {
     acc = 100 - acc;
     acc = Math.round(acc);
 
+    tsection.style.display = "none";
+    input.style.backgroundColor = "transparent";
+    $(".typing-section").removeClass("grey");
     accDisplay.innerHTML = acc + "%";
     wpmDisplay.innerHTML = wpm;
     cpmDisplay.innerHTML = cpm;
