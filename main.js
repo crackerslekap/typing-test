@@ -32,7 +32,6 @@ $("#input-field").on("keypress", () => {
             current = current.toString();
             current = current + "px";
             const currentHeight = $(".typing-section").css("height");
-            console.log(currentHeight);
             tsection.style.height = current;
         } else {
             current = current;
@@ -86,10 +85,26 @@ const sixtys = document.getElementById("60");
 const onetwentys = document.getElementById("120");
 const localStorage = window.localStorage;
 durationSetting = Number(localStorage.getItem("duration"));
+var autocorrect = Number(localStorage.getItem("autocorrect"));
 
 document.addEventListener("DOMContentLoaded", () => {
     var durationVal = Number(localStorage.getItem("duration"));
-    console.log(durationVal);
+    
+    if(autocorrect == 0) {
+        $(".autocorrect").addClass("teal");
+        $(".autocorrect").removeClass("grey");
+        $(".autocorrect").addClass("white-text");
+        $(".autocorrect").removeClass("black-text");
+        $(".on-off").text("OFF")
+    } else {
+        $(".autocorrect").removeClass("teal");
+        $(".autocorrect").addClass("grey");
+        $(".autocorrect").removeClass("white-text");
+        $(".autocorrect").addClass("black-text");
+        $(".on-off").text("ON")
+    }
+
+
     if(durationVal == 15) {
         fifteens.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
         thirtys.setAttribute("class", "btn-large waves-effect waves-light teal lighten-1");
@@ -167,11 +182,32 @@ onetwentys.onclick = () => {
     inputField.focus();
 }
 
+$(".autocorrect").on("click", () => {
+    if(autocorrect == true) {
+        $(".autocorrect").addClass("teal");
+        $(".autocorrect").removeClass("grey");
+        $(".autocorrect").addClass("white-text");
+        $(".autocorrect").removeClass("black-text");
+        $(".on-off").text("OFF")
+        autocorrect = 0;
+        localStorage.setItem("autocorrect", autocorrect.toString());
+        inputField.focus();
+    } else {
+        $(".autocorrect").removeClass("teal");
+        $(".autocorrect").addClass("grey");
+        $(".autocorrect").removeClass("white-text");
+        $(".autocorrect").addClass("black-text");
+        $(".on-off").text("ON")
+        autocorrect = 1;
+        localStorage.setItem("autocorrect", autocorrect.toString());
+        inputField.focus();
+    }
+})
+
 var chungus;
 
 function start() {
     inputField.removeEventListener("keypress", start);
-    console.log("before");
     inputField.addEventListener("keypress", check);
     var timer = durationSetting * 1000;
     chungus = durationSetting;
@@ -210,49 +246,10 @@ function accMod() {
     submitted.push(inputField.value);
     inputField.value = "";
     inputField.value.replace(/\s+/g, '');
-    console.log(submitted);
 }
 var realCPM;
 var realWPM;
 var adjustWPM;
-var autocorrect = Boolean(localStorage.getItem("autocorrect")); 
-
-if(autocorrect == false) {
-    $(".autocorrect").addClass("teal");
-    $(".autocorrect").removeClass("grey");
-    $(".autocorrect").addClass("white-text");
-    $(".autocorrect").removeClass("black-text");
-    $(".on-off").text("OFF")
-}else if(autocorrect == true) {
-    $(".autocorrect").removeClass("teal");
-    $(".autocorrect").addClass("grey");
-    $(".autocorrect").removeClass("white-text");
-    $(".autocorrect").addClass("black-text");
-    $(".on-off").text("ON")
-}
-
-$(".autocorrect").on("click", () => {
-    if(autocorrect) {
-        $(".autocorrect").addClass("teal");
-        $(".autocorrect").removeClass("grey");
-        $(".autocorrect").addClass("white-text");
-        $(".autocorrect").removeClass("black-text");
-        $(".on-off").text("OFF")
-        autocorrect = false;
-        localStorage.setItem("autocorrect", "false");
-        inputField.focus();
-    } else {
-        $(".autocorrect").removeClass("teal");
-        $(".autocorrect").addClass("grey");
-        $(".autocorrect").removeClass("white-text");
-        $(".autocorrect").addClass("black-text");
-        $(".on-off").text("ON")
-        autocorrect = true;
-        localStorage.setItem("autocorrect", "true");
-        inputField.focus();
-    }
-    console.log(autocorrect);
-})
 
 $(document).keydown(function () {
         realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
