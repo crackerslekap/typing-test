@@ -261,10 +261,6 @@ $(document).keydown(function () {
         adjustCPM = realCPM - lengthOfIncorrect;
         adjustWPM = adjustCPM / 5;
         adjustWPM = Math.round(adjustWPM);
-        if(realWPM < 0 || realWPM > 400 || adjustWPM < 0 || adjustWPM > 400){
-            realWPM = '';
-            adjustWPM = '';
-        }
         $('#raw').html(realWPM);
         $('#adjusted').html(adjustWPM);
     })
