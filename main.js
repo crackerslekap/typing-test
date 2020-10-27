@@ -18,22 +18,6 @@ for (var n = 0; n < text.length; n++) {
     parent.appendChild(newElem);
 }
 
-/*
-var toTruncate = 125;
-var arrList = [];
-var items = document.querySelectorAll(".corpus");
-for (var k = 0; k < items.length; k++) {
-    arrList.push(items[k].innerHTML);
-}
-arrList = arrList.toString();
-arrList = truncate(arrList, toTruncate, true);
-arrList = arrList.split(',');
-for (var p = 0; p < items.length; p++) {
-    items[p].innerHTML = arrList[p];
-}
-console.log(arrList);
-*/
-
 var keysPressed = 0;
 
 $("#input-field").on("keypress", () => {
@@ -57,17 +41,6 @@ $("#input-field").on("keypress", () => {
     keysPressed++;
 })
 
-/*
-function truncate(str, maxLength, useWordBoundary) {
-    if (str == null) return '';
-    var isTooLong = str.length > maxLength,
-        s_ = isTooLong ? str.substr(0, maxLength - 1) : str;
-    s_ = (useWordBoundary && isTooLong) ? s_.substr(0, s_.lastIndexOf(' ')) : s_;
-    return isTooLong ? s_ + '&hellip;' : s_;
-}
-*/
-
-//SHUFFLE FUNCTION
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue, randomIndex;
@@ -80,14 +53,13 @@ function shuffle(array) {
     }
     return array;
 }
-//
+
 
 const inputField = document.getElementById("input-field");
 const wpmDisplay = document.getElementById("final-wpm");
 const cpmDisplay = document.getElementById("final-cpm");
 const adjustDisplay = document.getElementById("adjust-cpm");
 const accDisplay = document.getElementById("acc");
-//const redo = document.getElementById("redo");
 const countdown = document.getElementById("countdown");
 const tohide = document.getElementById("to-hide");
 
@@ -98,11 +70,6 @@ inputField.addEventListener("keypress", start);
 $("#redo").on("click", () => {
     window.location.reload();
 })
-/*
-redo.addEventListener("click", () => {
-    window.location.reload();
-})
-*/
 
 var submitted = [];
 
@@ -110,6 +77,7 @@ var i = 0;
 var correct = 0;
 var incorrect = 0;
 var lengthOfIncorrect = 0;
+var lengthOfCorrect = 0;
 var durationSetting;
 
 const fifteens = document.getElementById("15");
@@ -223,46 +191,70 @@ function check(e) {
     }
 }
 
+var nodes = document.getElementById("text-content").children;
+
 function accMod() {
-    var nodes = document.getElementById("text-content").children;
+    if(autocorrect) {
+        inputField.value = text[i];
+    }
     if (inputField.value == text[i]) {
         nodes[i].style.color = "#26A69A";
         correct++;
+        lengthOfCorrect += inputField.value.length;
     } else {
         nodes[i].style.color = "#C62828";
         incorrect++;
-        lengthOfIncorrect += text[i].length;
+        lengthOfIncorrect += inputField.value.length;
     }
-    //also 100% sure there is a better way to do this but I can't figure anything else out :(
-        /*
-    if (i % 25 === 0 && i != 0 && i != 1) {
-        const tsection = document.querySelector(".typing-section");
-        const getStyle = getComputedStyle(tsection);
-        var current = getStyle.height;
-        current = current.replace("px", "");
-        current = Number(current);
-        if(current < 500) {
-            current = current + 25.75;
-            current = current.toString();
-            current = current + "px";
-            const currentHeight = $(".typing-section").css("height");
-            console.log(currentHeight);
-            tsection.style.height = current;
-        } else {
-            current = current;
-        }
-    }
-    */
     i++;
     submitted.push(inputField.value);
     inputField.value = "";
     inputField.value.replace(/\s+/g, '');
+    console.log(submitted);
 }
-
+var realCPM;
 var realWPM;
 var adjustWPM;
+var autocorrect = Boolean(localStorage.getItem("autocorrect")); 
 
-$(document).keydown(function (k) {
+if(autocorrect == false) {
+    $(".autocorrect").addClass("teal");
+    $(".autocorrect").removeClass("grey");
+    $(".autocorrect").addClass("white-text");
+    $(".autocorrect").removeClass("black-text");
+    $(".on-off").text("OFF")
+}else if(autocorrect == true) {
+    $(".autocorrect").removeClass("teal");
+    $(".autocorrect").addClass("grey");
+    $(".autocorrect").removeClass("white-text");
+    $(".autocorrect").addClass("black-text");
+    $(".on-off").text("ON")
+}
+
+$(".autocorrect").on("click", () => {
+    if(autocorrect) {
+        $(".autocorrect").addClass("teal");
+        $(".autocorrect").removeClass("grey");
+        $(".autocorrect").addClass("white-text");
+        $(".autocorrect").removeClass("black-text");
+        $(".on-off").text("OFF")
+        autocorrect = false;
+        localStorage.setItem("autocorrect", "false");
+        inputField.focus();
+    } else {
+        $(".autocorrect").removeClass("teal");
+        $(".autocorrect").addClass("grey");
+        $(".autocorrect").removeClass("white-text");
+        $(".autocorrect").addClass("black-text");
+        $(".on-off").text("ON")
+        autocorrect = true;
+        localStorage.setItem("autocorrect", "true");
+        inputField.focus();
+    }
+    console.log(autocorrect);
+})
+
+$(document).keydown(function () {
         realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
         realWPM = realCPM / 5;
         realWPM = Math.round(realWPM);
@@ -277,57 +269,50 @@ $(document).keydown(function (k) {
         $('#adjusted').html(adjustWPM);
     })
 
+
 function calc() {
     const tsection = document.querySelector(".text-content");
     const input = document.querySelector(".input");
-    var cpm;
-    var wpm;
-    var adjustedCpm;
-    var acc;
-    var withoutSpace = inputField.value;
-    withoutSpace = withoutSpace.replace(/\s/g, "");
-    console.log(withoutSpace);
     var string = submitted.toString();
-    string = string.replace(/,/g, ' ');
-    cpm = string.length * 60 / durationSetting;
-
     var acc = (incorrect / correct) * 100;
-    var toModify;
+
+    string = string.replace(/,/g, ' ');
     acc = 100 - acc;
     acc = Math.round(acc);
+    /*
+    lengthOfIncorrect = incorrect * 5;
     adjustedCpm = cpm - lengthOfIncorrect;
     wpm = adjustedCpm / 5;
     wpm = Math.round(wpm);
-
-    adjustedCpm = String(adjustedCpm);
-    wpm = String(wpm);
-    acc = String(acc);
-
-    if(acc.includes("-")) {
-        acc = "ERR";
+    */
+   /*
+    var toModify;
+    var acc = (incorrect / correct) * 100;
+    acc = 100 - acc;
+    acc = Math.round(acc);
+    realCPM = Math.round(string.length * 60 / durationSetting);
+    realWPM = realCPM / 5;
+    realWPM = Math.round(realWPM);
+    lengthOfIncorrect = incorrect * 5;
+    adjustCPM = realCPM - lengthOfIncorrect;
+    adjustWPM = adjustCPM / 5;
+    adjustWPM = Math.round(adjustWPM);
+    if(realWPM < 0 || realWPM > 400 || adjustWPM < 0 || adjustWPM > 400){
+        realWPM = '';
+        adjustWPM = '';
     }
-
-    if(wpm.includes("-")) {
-        wpm = "ERR";
-    }
-
-    if(adjustedCpm.includes("-")) {
-        adjustedCpm = "ERR";
-        toModify = "";
-    } else {
-        toModify = "%";
-    }
+    */
 
     tsection.style.display = "none";
     input.style.backgroundColor = "transparent";
     $(".typing-section").removeClass("grey");
 
-    accDisplay.innerHTML = acc + toModify;
-    wpmDisplay.innerHTML = wpm;
-    cpmDisplay.innerHTML = cpm;
-    adjustDisplay.innerHTML = adjustedCpm;
+    acc = String(acc);
+    accDisplay.innerHTML = acc + "%";
+    wpmDisplay.innerHTML = String(adjustWPM);
+    cpmDisplay.innerHTML = String(realCPM);
+    adjustDisplay.innerHTML = String(adjustCPM);
 
     $("#preview").css("display", "none");
-
-    document.getElementById("text-content").style.display = "none";
+    $("#text-content").css("display", "none");
 }
