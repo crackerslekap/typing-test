@@ -7,7 +7,9 @@ for (var l = 0; l < text.length; l++) {
         l--;
     }
 }
+
 shuffle(text);
+
 for (var n = 0; n < text.length; n++) {
     let parent = document.getElementById("text-content");
     var current = text[n];
@@ -77,14 +79,14 @@ const setupUI = user => {
 var keysPressed = 0;
 
 $("#input-field").on("keypress", () => {
-    if(keysPressed % 150 === 0 && keysPressed != 0) {
+    if(keysPressed % 130 === 0 && keysPressed != 0) {
         const tsection = document.querySelector(".typing-section");
         const getStyle = getComputedStyle(tsection);
         var current = getStyle.height;
         current = current.replace("px", "");
         current = Number(current);
         if(current < 500) {
-            current = current + 25.75;
+            current = current + 28.96875;
             current = current.toString();
             current = current + "px";
             const currentHeight = $(".typing-section").css("height");
@@ -143,9 +145,47 @@ const onetwentys = document.getElementById("120");
 const localStorage = window.localStorage;
 durationSetting = Number(localStorage.getItem("duration"));
 var autocorrect = Number(localStorage.getItem("autocorrect"));
+var themeSetting = Number(localStorage.getItem("theme"));
 durationVal = durationSetting;
 
 document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("countdown").style.display = "block";
+    if(themeSetting == 0) {
+        $("body").css("background-color", "#212121");
+
+        $(".corpus").css("color", "#f2f3f4");
+        $(".changepls").css("color", "#f2f3f4");
+        $("#countdown").css("color", "#f2f3f4");
+        $("#input-field").css("color", "#f2f3f4");
+
+        $(".transparentpls").css("background-color", "212121");
+        $(".text-content").css("background-color", "#212121");
+        $(".typing-content").css("background-color", "#212121");
+
+        $(".theme-toggle").removeClass("white-text");
+        $(".theme-toggle").addClass("black-text");
+        $(".theme-toggle").removeClass("waves-light");
+        $(".theme-toggle").addClass("waves-dark");
+        $(".theme-toggle").css("background-color", "#BDBDBD");
+    } else {
+        $("body").css("background-color", "#f2f3f4");
+
+        $(".corpus").css("color", "#212121");
+        $(".changepls").css("color", "#212121");
+        $("#countdown").css("color", "#212121");
+        $("#input-field").css("color", "#212121");
+
+        $(".transparentpls").css("background-color", "f2f3f4");
+        $(".text-content").css("background-color", "#f2f3f4");
+        $(".typing-content").css("background-color", "#f2f3f4");
+
+
+        $(".theme-toggle").addClass("white-text");
+        $(".theme-toggle").removeClass("black-text");
+        $(".theme-toggle").addClass("waves-light");
+        $(".theme-toggle").removeClass("waves-dark");
+        $(".theme-toggle").css("background-color", "#212121");
+    }
 
     if(autocorrect == 0) {
         $(".autocorrect").addClass("teal");
@@ -260,7 +300,52 @@ $(".autocorrect").on("click", () => {
         localStorage.setItem("autocorrect", autocorrect.toString());
         inputField.focus();
     }
-})
+});
+
+$(".theme-toggle").on("click", () => {
+    if(themeSetting == 0) {
+        //SET BODY TO WHITE, THEME TOGGLE TO BLACK
+        $("body").css("background-color", "#f2f3f4");
+
+        $(".corpus").css("color", "#212121");
+        $(".changepls").css("color", "#212121");
+        $("#countdown").css("color", "#212121");
+        $("#input-field").css("color", "#212121");
+
+        $(".transparentpls").css("background-color", "f2f3f4");
+        $(".text-content").css("background-color", "#f2f3f4");
+        $(".typing-content").css("background-color", "#f2f3f4");
+
+
+        $(".theme-toggle").addClass("white-text");
+        $(".theme-toggle").removeClass("black-text");
+        $(".theme-toggle").addClass("waves-light");
+        $(".theme-toggle").removeClass("waves-dark");
+        $(".theme-toggle").css("background-color", "#212121");
+        themeSetting = 1;
+        localStorage.setItem("themeSetting", themeSetting.toString());
+    } else {
+        //SET BODY TO BLACK, THEME TOGGLE TO WHITE
+        $("body").css("background-color", "#212121");
+
+        $(".corpus").css("color", "#f2f3f4");
+        $(".changepls").css("color", "#f2f3f4");
+        $("#countdown").css("color", "#f2f3f4");
+        $("#input-field").css("color", "#f2f3f4");
+
+        $(".transparentpls").css("background-color", "212121");
+        $(".text-content").css("background-color", "#212121");
+        $(".typing-content").css("background-color", "#212121");
+
+        $(".theme-toggle").removeClass("white-text");
+        $(".theme-toggle").addClass("black-text");
+        $(".theme-toggle").removeClass("waves-light");
+        $(".theme-toggle").addClass("waves-dark");
+        $(".theme-toggle").css("background-color", "#BDBDBD");
+        themeSetting = 0;
+        localStorage.setItem("themeSetting", themeSetting.toString());
+    }
+});
 
 var chungus;
 
@@ -354,6 +439,7 @@ function updateData(rawcpm, adjustcpm, adjustwpm, acc) {
 function calc() {
     const tsection = document.querySelector(".text-content");
     const input = document.querySelector(".input");
+    document.getElementById("countdown").style.display = "none";
     var string = submitted.toString();
     var acc = (incorrect / correct) * 100;
     string = string.replace(/,/g, ' ');

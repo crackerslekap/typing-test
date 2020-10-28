@@ -8,24 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+        body {
+            background-color: #f2f3f4;
+            font-family: 'Montserrat', sans-serif;
+        }
         .container {
             min-height: 100%;
             align-items: center;
         }
         #corpus {
-            font-size: 16px;
+            background-color: inherit;
+            font-size: 18px;
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.6em;
+            line-height: 28.96875px;
         }
         .typing-section {
-            height: 3.2em;
+            background-color: inherit;
+            height: 57.9375px;
             margin: 25px;
         }
         .input {
             margin-top: 25px;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
         }
         p {
             font-size: 24px;
@@ -34,6 +37,7 @@
             font-size: 64px;
         }
         .text-content {
+            background-color: #f2f3f4;
             height: inherit;
             overflow: hidden;
         }
@@ -50,7 +54,7 @@
             width: 25%;
         }
         .transparentpls {
-            background-color: white;
+            background-color: inherit;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -68,23 +72,30 @@
         #signup-email, #login-email {
             width: 100%;
         }
+        .row {
+            width: 1250px;
+        }
+        nav {
+            background-color: transparent;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
     <nav>
-        <div class="nav-wrapper teal lighten-1">
+        <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li class="logged-in">
-                  <a href="#" class="white-text modal-trigger" data-target="">Account</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="">Account</a>
                 </li>
                 <li class="logged-in">
-                  <a href="#" class="white-text" id="logout">Logout</a>
+                  <a href="#" class="grey-text" id="logout">Logout</a>
                 </li>
                 <li class="logged-out">
-                  <a href="#" class="white-text modal-trigger" data-target="">Login</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="">Login</a>
                 </li>
                 <li class="logged-out">
-                  <a href="#" class="white-text modal-trigger" data-target="">Sign up</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="">Sign up</a>
                 </li>
             </ul>
         </div>
@@ -93,7 +104,7 @@
     <!-- MODALS-->
     <div id="modal-signup" class="modal">
         <div class="modal-content">
-          <h4>Sign up</h4><br />
+          <h4>Sign up</h4><br>
           <form id="signup-form">
             <div class="input-field">
               <input type="email" id="signup-email" required />
@@ -111,7 +122,7 @@
     
       <div id="modal-login" class="modal">
         <div class="modal-content">
-          <h4>Login</h4><br />
+          <h4>Login</h4><br>
           <form id="login-form">
             <div class="input-field">
               <input type="email" id="login-email" required />
@@ -129,7 +140,7 @@
     
       <div id="modal-account" class="modal">
         <div class="modal-content center-align">
-          <h4>Account details</h4><br />
+          <h4>Account details</h4><br>
           <div class="account-details" id="account-details">
 
           </div>
@@ -137,19 +148,18 @@
         </div>
       </div>
 
-    <div class="container">
         <div class="row">
             <!--
             <div class="center-align">
                 <h1 id="to-hide">SELECT DURATION</h1>
             </div>
             -->
-            <div class="typing-section grey darken-3">
+            <div class="typing-section">
                 <div id="preview" class="transparentpls">
                     <button class="raw-wpm btn-large btn-flat grey lighten-1">Raw WPM: <span style="font-size: 24px" id="raw"></span></button>
                     <button class="adjusted-wpm btn-large btn-flat grey lighten-1">WPM: <span style="font-size: 24px" id="adjusted"></span></button>
                 </div>
-                <div class="text-content white" id="text-content">
+                <div class="text-content" id="text-content">
                 </div>
                 <div class="input">
                     <input type="text" class="col s11" id="input-field">
@@ -158,22 +168,22 @@
             </div>
         </div>
         <div class="result center-align">
-            <span id="countdown">0</span>
-            <p>Raw CPM: <span id="final-cpm"></span></p>
-            <p>Adjusted CPM: <span id="adjust-cpm"></span></p>
-            <p>WPM: <span id="final-wpm"></span></p>
-            <p>Acc: <span id="acc"></span></p>
-            <div class="durs">
+            <span id="countdown"></span>
+            <p class="changepls">Raw CPM: <span id="final-cpm"></span></p>
+            <p class="changepls">Adjusted CPM: <span id="adjust-cpm"></span></p>
+            <p class="changepls">WPM: <span id="final-wpm"></span></p>
+            <p class="changepls">Acc: <span id="acc"></span></p>
+            <div class="buttons">
                 <button class="btn-large waves-effect waves-light" id="15">15s</button>
                 <button class="btn-large waves-effect waves-light" id="30">30s</button>
                 <button class="btn-large waves-effect waves-light" id="60">60s</button>
                 <button class="btn-large waves-effect waves-light" id="120">120s</button>
                 <br><br>
                 <button class="autocorrect btn-large btn-flat white-text teal lighten-1 waves-effect">Autocorrect: <span class="on-off">OFF</span></button>
+                <button class="theme-toggle btn-large btn-flat white-text waves-effect waves-light">TOGGLE THEME</button>
             </div>
             <br>
         </div>
-    </div>
 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
