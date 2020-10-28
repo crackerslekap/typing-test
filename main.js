@@ -318,7 +318,7 @@ $(document).keydown(function () {
     adjustWPM = adjustCPM / 5;
     adjustWPM = Math.round(adjustWPM);
 */
-    realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
+    realCPM = Math.round((correct + incorrect) * 5 * 60 / (durationSetting - chungus));
     realWPM = Math.round(realCPM / 5);
     adjustCPM = Math.round(correct * 5 * 60 / (durationSetting - chungus));
     adjustWPM = Math.round(adjustCPM / 5);
