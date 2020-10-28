@@ -145,7 +145,7 @@ const onetwentys = document.getElementById("120");
 const localStorage = window.localStorage;
 durationSetting = Number(localStorage.getItem("duration"));
 var autocorrect = Number(localStorage.getItem("autocorrect"));
-var themeSetting = Number(localStorage.getItem("theme"));
+var themeSetting = Number(localStorage.getItem("themeSetting"));
 durationVal = durationSetting;
 
 document.addEventListener("DOMContentLoaded", () => {
