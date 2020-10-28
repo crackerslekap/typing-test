@@ -1,7 +1,5 @@
 typing test
 
-(WPM CALCULATION IS NOT 100% ACCURATE, im' still trying to fix it and it's giving me the shits)
-
 todo:
 
 implement a caret/cursor on the word list
