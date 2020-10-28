@@ -252,12 +252,22 @@ var realWPM;
 var adjustWPM;
 
 $(document).keydown(function () {
+    /*
         realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
         realWPM = realCPM / 5;
         realWPM = Math.round(realWPM);
         adjustCPM = realCPM - lengthOfIncorrect;
         adjustWPM = adjustCPM / 5;
         adjustWPM = Math.round(adjustWPM);
+    */
+        realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
+        realWPM = Math.round(realCPM / 5);
+        adjustCPM = Math.round(correct * 5 * 60 / (durationSetting - chungus));
+        adjustWPM = Math.round(adjustCPM / 5);
+        if(realWPM < 0 || realWPM > 1000 || adjustWPM < 0 || adjustWPM > 1000){
+            realWPM = '';
+            adjustWPM = '';
+        }
         $('#raw').html(realWPM);
         $('#adjusted').html(adjustWPM);
     })
