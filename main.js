@@ -18,6 +18,62 @@ for (var n = 0; n < text.length; n++) {
     parent.appendChild(newElem);
 }
 
+const accountDetails = document.getElementById("account-details");
+const loggedInLinks = document.querySelectorAll(".logged-in");
+const loggedOutLinks = document.querySelectorAll(".logged-out");
+
+const setupUI = user => {
+    if (user) {
+      // Account info
+        if (!user.displayName) {
+          dataBase
+            .collection("users")
+            .doc(user.uid)
+            .get()
+            .then(doc => {
+              const html = `
+                          <div> User: <span style='color:brown'>${
+                doc.data().username
+                }</span></div>
+                          <div> Password: <span style='color:brown'>${
+                doc.data().pass
+                }</span></div>
+                      `;
+              accountDetails.innerHTML = html;
+            });
+        } else {
+          const html = `
+                          <div> Name of User: <span style='color:brown'>${
+            user.displayName
+            }</span></div>
+                          <div> Logged in as: <span style='color:brown'>${
+            user.email
+            }</span></div>
+                      `;
+          accountDetails.innerHTML = html;
+        }
+
+        // Toggle UI elements
+        // set logged in ones to visible
+        // Toggle UI elements
+        loggedInLinks.forEach(item => {
+            item.style.display = "block";
+        });
+        loggedOutLinks.forEach(item => {
+            item.style.display = "none";
+        });
+    } else {
+        // Hide account info
+        accountDetails.innerHTML = "";
+        // Toggle UI elements
+        loggedInLinks.forEach(item => {
+        item.style.display = "none";
+        });
+        loggedOutLinks.forEach(item => {
+        item.style.display = "block";
+        });
+    }
+};
 var keysPressed = 0;
 
 $("#input-field").on("keypress", () => {
@@ -78,6 +134,7 @@ var incorrect = 0;
 var lengthOfIncorrect = 0;
 var lengthOfCorrect = 0;
 var durationSetting;
+var durationVal;
 
 const fifteens = document.getElementById("15");
 const thirtys = document.getElementById("30");
@@ -86,10 +143,10 @@ const onetwentys = document.getElementById("120");
 const localStorage = window.localStorage;
 durationSetting = Number(localStorage.getItem("duration"));
 var autocorrect = Number(localStorage.getItem("autocorrect"));
+durationVal = durationSetting;
 
 document.addEventListener("DOMContentLoaded", () => {
-    var durationVal = Number(localStorage.getItem("duration"));
-    
+
     if(autocorrect == 0) {
         $(".autocorrect").addClass("teal");
         $(".autocorrect").removeClass("grey");
@@ -103,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
         $(".autocorrect").addClass("black-text");
         $(".on-off").text("ON")
     }
-
 
     if(durationVal == 15) {
         fifteens.setAttribute("class", "btn-large waves-effect waves-light grey lighten-1 black-text");
@@ -134,6 +190,8 @@ document.addEventListener("DOMContentLoaded", () => {
         inputField.disabled = false;
         inputField.focus();
     }
+    var modals = document.querySelectorAll('.modal');
+    M.Modal.init(modals);
 });
 
 //100% sure there's a better way to do this but can't get anything else to work
@@ -252,33 +310,52 @@ var realWPM;
 var adjustWPM;
 
 $(document).keydown(function () {
-    /*
-        realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
-        realWPM = realCPM / 5;
-        realWPM = Math.round(realWPM);
-        adjustCPM = realCPM - lengthOfIncorrect;
-        adjustWPM = adjustCPM / 5;
-        adjustWPM = Math.round(adjustWPM);
-    */
-        realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
-        realWPM = Math.round(realCPM / 5);
-        adjustCPM = Math.round(correct * 5 * 60 / (durationSetting - chungus));
-        adjustWPM = Math.round(adjustCPM / 5);
-        if(realWPM < 0 || realWPM > 1000 || adjustWPM < 0 || adjustWPM > 1000){
-            realWPM = '';
-            adjustWPM = '';
-        }
-        $('#raw').html(realWPM);
-        $('#adjusted').html(adjustWPM);
-    })
+/*
+    realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
+    realWPM = realCPM / 5;
+    realWPM = Math.round(realWPM);
+    adjustCPM = realCPM - lengthOfIncorrect;
+    adjustWPM = adjustCPM / 5;
+    adjustWPM = Math.round(adjustWPM);
+*/
+    realCPM = Math.round(submitted.toString().length * 60 / (durationSetting - chungus));
+    realWPM = Math.round(realCPM / 5);
+    adjustCPM = Math.round(correct * 5 * 60 / (durationSetting - chungus));
+    adjustWPM = Math.round(adjustCPM / 5);
+    if(realWPM < 0 || realWPM > 1000 || adjustWPM < 0 || adjustWPM > 1000){
+        realWPM = '';
+        adjustWPM = '';
+    }
+    $('#raw').html(realWPM);
+    $('#adjusted').html(adjustWPM);
+});
 
+/*
+const globVar = window.value;
+
+function updateData(rawcpm, adjustcpm, adjustwpm, acc) {
+    const user = globVar;
+    dataBase
+    .collection("users")
+    .doc(user.uid)
+    .get()
+    .then(doc => {
+        dataBase.collection('users').doc(cred.user.uid).update({
+            rawCPMs: dataBase.FieldValue.arrayUnion(rawcpm),
+            adjustCPMs: dataBase.FieldValue.arrayUnion(adjustcpm),
+            adjustWPMs: dataBase.FieldValue.arrayUnion(adjustwpm),
+            accs: dataBase.FieldValue.arrayUnion(acc)
+        });
+        console.log(dataBase.collection('users').doc(cred.user.uid));
+    });
+}
+*/
 
 function calc() {
     const tsection = document.querySelector(".text-content");
     const input = document.querySelector(".input");
     var string = submitted.toString();
     var acc = (incorrect / correct) * 100;
-
     string = string.replace(/,/g, ' ');
     acc = 100 - acc;
     acc = Math.round(acc);
@@ -305,10 +382,11 @@ function calc() {
         adjustWPM = '';
     }
     */
-
     tsection.style.display = "none";
     input.style.backgroundColor = "transparent";
     $(".typing-section").removeClass("grey");
+
+    //updateData(realCPM, adjustCPM, adjustWPM, acc);
 
     acc = String(acc);
     accDisplay.innerHTML = acc + "%";

@@ -65,9 +65,78 @@
         #raw, #adjusted {
             margin: 5px;
         }
+        #signup-email, #login-email {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-wrapper teal lighten-1">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="logged-in">
+                  <a href="#" class="white-text modal-trigger" data-target="modal-account">Account</a>
+                </li>
+                <li class="logged-in">
+                  <a href="#" class="white-text" id="logout">Logout</a>
+                </li>
+                <li class="logged-out">
+                  <a href="#" class="white-text modal-trigger" data-target="modal-login">Login</a>
+                </li>
+                <li class="logged-out">
+                  <a href="#" class="white-text modal-trigger" data-target="modal-signup">Sign up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MODALS-->
+    <div id="modal-signup" class="modal">
+        <div class="modal-content">
+          <h4>Sign up</h4><br />
+          <form id="signup-form">
+            <div class="input-field">
+              <input type="email" id="signup-email" required />
+              <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose a password</label>
+            </div>
+            <button class="btn teal lighten-1 z-depth-0">Sign up</button>
+            <div class="red-text lighten-2" id="signupMsgDiv"></div>
+          </form>
+        </div>
+      </div>
+    
+      <div id="modal-login" class="modal">
+        <div class="modal-content">
+          <h4>Login</h4><br />
+          <form id="login-form">
+            <div class="input-field">
+              <input type="email" id="login-email" required />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="login-password" required />
+              <label for="login-password">Your password</label>
+            </div>
+            <button class="btn teal lighten-1 z-depth-0">Login</button>
+            <div class="red-text lighten-2" id="loginMsgDiv"></div>
+          </form>
+        </div>
+      </div>
+    
+      <div id="modal-account" class="modal">
+        <div class="modal-content center-align">
+          <h4>Account details</h4><br />
+          <div class="account-details" id="account-details">
+
+          </div>
+          <div class="account-extras"></div>
+        </div>
+      </div>
+
     <div class="container">
         <div class="row">
             <!--
@@ -106,12 +175,41 @@
         </div>
     </div>
 
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+    <script>
+    var firebaseConfig = {
+        apiKey: "AIzaSyD2vhMOi1qgEM71Fp-VXLyoatLE8wCT-go",
+        authDomain: "typing-test-b6ecc.firebaseapp.com",
+        databaseURL: "https://typing-test-b6ecc.firebaseio.com",
+        projectId: "typing-test-b6ecc",
+        storageBucket: "typing-test-b6ecc.appspot.com",
+        messagingSenderId: "492739539225",
+        appId: "1:492739539225:web:fb54cdc1c9bb2cc5e95588",
+        measurementId: "G-7H05Q9M0XC"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    const auth = firebase.auth();
+    const dataBase = firebase.firestore();
+
+    </script>
     <script
 		src="https://code.jquery.com/jquery-3.5.1.js"
 		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
         crossorigin="anonymous">
     </script>
     <script src="main.js"></script>
+    <script src="auth.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         M.AutoInit();
