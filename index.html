@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!--
     <nav>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="navtext hide-on-med-and-down">
@@ -18,7 +19,7 @@
             </ul>
         </div>
     </nav>
-    <!--
+    -->
     <nav>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -78,12 +79,22 @@
         <div class="modal-content center-align">
           <h4>Account details</h4><br>
           <div class="account-details" id="account-details">
-              <div class="highest-wpm">Highest WPM: <span class="highest-modify"></span></div>
+              <div class="durSelection">
+                  <button class="btn btn-large waves-effect waves-light teal lighten-1 acct-15">15s</button>
+                  <button class="btn btn-large waves-effect waves-light teal lighten-1 acct-30">30s</button>
+                  <button class="btn btn-large waves-effect waves-light teal lighten-1 acct-60">60s</button>
+                  <button class="btn btn-large waves-effect waves-light teal lighten-1 acct-120">120s</button>
+              </div>
+              <div class="content">
+                  <p>Highest WPM: <span class="highest-wpm"></span></p>
+                  <p>Avg WPM: <span class="avg-wpm"></span></p>
+                  <p>Avg Accuracy: <span class="avg-acc"></span></p>
+              </div>
           </div>
           <div class="account-extras"></div>
         </div>
       </div>
-    -->
+    
 
         <div class="row">
             <!--
@@ -147,7 +158,7 @@
     firebase.analytics();
 
     const auth = firebase.auth();
-    const dataBase = firebase.firestore();
+    const db = firebase.firestore();
 
     </script>
     <script

@@ -27,38 +27,6 @@ const loggedOutLinks = document.querySelectorAll(".logged-out");
 
 const setupUI = user => {
     if (user) {
-      // Account info
-        if (!user.displayName) {
-          dataBase
-            .collection("users")
-            .doc(user.uid)
-            .get()
-            .then(doc => {
-              const html = `
-                          <div> User: <span style='color:brown'>${
-                doc.data().username
-                }</span></div>
-                          <div> Password: <span style='color:brown'>${
-                doc.data().pass
-                }</span></div>
-                      `;
-              accountDetails.innerHTML = html;
-            });
-        } else {
-          const html = `
-                          <div> Name of User: <span style='color:brown'>${
-            user.displayName
-            }</span></div>
-                          <div> Logged in as: <span style='color:brown'>${
-            user.email
-            }</span></div>
-                      `;
-          accountDetails.innerHTML = html;
-        }
-
-        // Toggle UI elements
-        // set logged in ones to visible
-        // Toggle UI elements
         loggedInLinks.forEach(item => {
             item.style.display = "block";
         });
@@ -66,9 +34,7 @@ const setupUI = user => {
             item.style.display = "none";
         });
     } else {
-        // Hide account info
         accountDetails.innerHTML = "";
-        // Toggle UI elements
         loggedInLinks.forEach(item => {
         item.style.display = "none";
         });
@@ -303,6 +269,7 @@ $(".autocorrect").on("click", () => {
     }
 });
 
+
 $(".theme-toggle").on("click", () => {
     if(themeSetting == 0) {
         //SET BODY TO WHITE, THEME TOGGLE TO BLACK
@@ -417,29 +384,28 @@ $(document).keydown(function () {
 });
 
 /*function updateData(rawcpm, adjustcpm, adjustwpm, acc) {
-    dataBase
+    db
     .collection("users")
     .doc(user.uid)
     .get()
     .then(doc => {
-        dataBase.collection('users').doc(cred.user.uid).update({
-            rawCPMs: dataBase.FieldValue.arrayUnion(rawcpm),
-            adjustCPMs: dataBase.FieldValue.arrayUnion(adjustcpm),
-            adjustWPMs: dataBase.FieldValue.arrayUnion(adjustwpm),
-            accs: dataBase.FieldValue.arrayUnion(acc)
+        db.collection('users').doc(cred.user.uid).update({
+            rawCPMs: db.FieldValue.arrayUnion(rawcpm),
+            adjustCPMs: db.FieldValue.arrayUnion(adjustcpm),
+            adjustWPMs: db.FieldValue.arrayUnion(adjustwpm),
+            accs: db.FieldValue.arrayUnion(acc)
         });
-        console.log(dataBase.collection('users').doc(cred.user.uid));
+        console.log(db.collection('users').doc(cred.user.uid));
     });
 }*/
 
+var acc;
+const tsection = document.querySelector(".text-content");
+const input = document.querySelector(".input");
 
 function calc() {
-    const tsection = document.querySelector(".text-content");
-    const input = document.querySelector(".input");
     document.getElementById("countdown").style.display = "none";
-    var string = submitted.toString();
-    var acc = (incorrect / correct) * 100;
-    string = string.replace(/,/g, ' ');
+    acc = (incorrect / correct) * 100;
     acc = 100 - acc;
     acc = Math.round(acc);
     /*
@@ -466,6 +432,25 @@ function calc() {
     }
     */
 
+
+
+   submitTest(realCPM, adjustCPM, adjustWPM, acc, durationSetting, autocorrect);
+}
+
+document.querySelector(".acct-15").addEventListener("click", function pre() {
+    updateDisplay(15);
+});
+document.querySelector(".acct-30").addEventListener("click", function pre() {
+    updateDisplay(30);
+})
+document.querySelector(".acct-60").addEventListener("click", function pre() {
+    updateDisplay(60);
+})
+document.querySelector(".acct-120").addEventListener("click", function pre() {
+    updateDisplay(120);
+})
+
+function updateResults() {
     tsection.style.display = "none";
     input.style.backgroundColor = "transparent";
     $(".typing-section").removeClass("grey");
@@ -478,4 +463,5 @@ function calc() {
 
     $("#preview").css("display", "none");
     $("#text-content").css("display", "none");
+
 }
