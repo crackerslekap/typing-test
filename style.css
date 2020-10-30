@@ -81,3 +81,6 @@ nav {
 nav {
     margin-bottom: 100px;
 }
+.modal {
+    max-height: 75%;
+}

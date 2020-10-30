@@ -172,14 +172,19 @@ function updateDisplay(durSetting) {
     let highestElem = document.querySelector(".highest-wpm");
     let avgWpmElem = document.querySelector(".avg-wpm");
     let avgAccElem = document.querySelector(".avg-acc");
+    let container = document.querySelector(".recent-parent");
     
     if(durSetting == 15) {
         db.collection("users").doc(user.uid).collection("scores").doc('15').get().then((doc) => {
+            //MAIN STATS
             highestElem.innerHTML = "";
             avgWpmElem.innerHTML = "";
             avgAccElem.innerHTML = "";
+            container.innerHTML = "";
+
             let wpmSum = 0;
             let accSum = 0;
+            let rawArr = doc.data().rawCPMs;
             let wpmArr = doc.data().adjustWPMs;
             let accArr = doc.data().accs;
             wpmArr.forEach((item) => (wpmSum += item));
@@ -190,14 +195,33 @@ function updateDisplay(durSetting) {
             highestElem.innerHTML = max;
             avgWpmElem.innerHTML = wpmAvg;
             avgAccElem.innerHTML = accAvg;
+
+            //RECENT SCORES
+            for(var r = 0; r < wpmArr.length; r++) {
+                var innerParent = document.createElement("tr");
+                var recentRawElem = document.createElement("td");
+                var recentWpmElem = document.createElement("td");
+                var recentAccElem = document.createElement("td");
+                recentRawElem.innerHTML = Math.round(rawArr[r] / 5);
+                recentWpmElem.innerHTML = wpmArr[r];
+                recentAccElem.innerHTML = accArr[r];
+                innerParent.appendChild(recentRawElem);
+                innerParent.appendChild(recentWpmElem);
+                innerParent.appendChild(recentAccElem);
+                container.appendChild(innerParent);
+            }
+
         }).catch((err) => { console.log(err)});
     } else if(durSetting == 30) {
         db.collection("users").doc(user.uid).collection("scores").doc('30').get().then((doc) => {
             highestElem.innerHTML = "";
             avgWpmElem.innerHTML = "";
             avgAccElem.innerHTML = "";
+            container.innerHTML = "";
+
             let wpmSum = 0;
             let accSum = 0;
+            let rawArr = doc.data().rawCPMs;
             let wpmArr = doc.data().adjustWPMs;
             let accArr = doc.data().accs;
             wpmArr.forEach((item) => (wpmSum += item));
@@ -208,14 +232,33 @@ function updateDisplay(durSetting) {
             highestElem.innerHTML = max;
             avgWpmElem.innerHTML = wpmAvg;
             avgAccElem.innerHTML = accAvg;
+
+            //RECENT SCORES
+            for(var r = 0; r < wpmArr.length; r++) {
+                var innerParent = document.createElement("tr");
+                var recentRawElem = document.createElement("td");
+                var recentWpmElem = document.createElement("td");
+                var recentAccElem = document.createElement("td");
+                recentRawElem.innerHTML = Math.round(rawArr[r] / 5);
+                recentWpmElem.innerHTML = wpmArr[r];
+                recentAccElem.innerHTML = accArr[r];
+                innerParent.appendChild(recentRawElem);
+                innerParent.appendChild(recentWpmElem);
+                innerParent.appendChild(recentAccElem);
+                container.appendChild(innerParent);
+            }
+
         }).catch((err) => { console.log(err)});
     } else if(durSetting == 60) {
         db.collection("users").doc(user.uid).collection("scores").doc('60').get().then((doc) => {
             highestElem.innerHTML = "";
             avgWpmElem.innerHTML = "";
             avgAccElem.innerHTML = "";
+            container.innerHTML = "";
+
             let wpmSum = 0;
             let accSum = 0;
+            let rawArr = doc.data().rawCPMs;
             let wpmArr = doc.data().adjustWPMs;
             let accArr = doc.data().accs;
             wpmArr.forEach((item) => (wpmSum += item));
@@ -226,14 +269,33 @@ function updateDisplay(durSetting) {
             highestElem.innerHTML = max;
             avgWpmElem.innerHTML = wpmAvg;
             avgAccElem.innerHTML = accAvg;
+
+            //RECENT SCORES
+            for(var r = 0; r < wpmArr.length; r++) {
+                var innerParent = document.createElement("tr");
+                var recentRawElem = document.createElement("td");
+                var recentWpmElem = document.createElement("td");
+                var recentAccElem = document.createElement("td");
+                recentRawElem.innerHTML = Math.round(rawArr[r] / 5);
+                recentWpmElem.innerHTML = wpmArr[r];
+                recentAccElem.innerHTML = accArr[r];
+                innerParent.appendChild(recentRawElem);
+                innerParent.appendChild(recentWpmElem);
+                innerParent.appendChild(recentAccElem);
+                container.appendChild(innerParent);
+            }
+
         }).catch((err) => { console.log(err)});
     } else if(durSetting == 120) {
         db.collection("users").doc(user.uid).collection("scores").doc('120').get().then((doc) => {
             highestElem.innerHTML = "";
             avgWpmElem.innerHTML = "";
             avgAccElem.innerHTML = "";
+            container.innerHTML = "";
+
             let wpmSum = 0;
             let accSum = 0;
+            let rawArr = doc.data().rawCPMs;
             let wpmArr = doc.data().adjustWPMs;
             let accArr = doc.data().accs;
             wpmArr.forEach((item) => (wpmSum += item));
@@ -244,6 +306,22 @@ function updateDisplay(durSetting) {
             highestElem.innerHTML = max;
             avgWpmElem.innerHTML = wpmAvg;
             avgAccElem.innerHTML = accAvg;
+
+            //RECENT SCORES
+            for(var r = 0; r < wpmArr.length; r++) {
+                var innerParent = document.createElement("tr");
+                var recentRawElem = document.createElement("td");
+                var recentWpmElem = document.createElement("td");
+                var recentAccElem = document.createElement("td");
+                recentRawElem.innerHTML = Math.round(rawArr[r] / 5);
+                recentWpmElem.innerHTML = wpmArr[r];
+                recentAccElem.innerHTML = accArr[r];
+                innerParent.appendChild(recentRawElem);
+                innerParent.appendChild(recentWpmElem);
+                innerParent.appendChild(recentAccElem);
+                container.appendChild(innerParent);
+            }
+
         }).catch((err) => { console.log(err)});
     } else {
         return;
