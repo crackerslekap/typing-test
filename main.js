@@ -1,12 +1,13 @@
 //TEXT INITIALISATION
-var text = "about above add after again air all almost along also always America an and animal another answer any are around as ask at away back be because been before began begin being below between big book both boy but by call came can car carry change children city close come could country cut day did different do does don't down each earth eat end enough even every example eye face family far father feet few find first follow food for form found four from get girl give go good got great group grow had hand hard has have he head hear help her here high him his home house how idea if important in Indian into is it its it's just keep kind know land large last later learn leave left let letter life light like line list little live long look made make man many may me mean men might mile miss more most mother mountain move much must my name near need never new next night no not now number of off often oil old on once one only open or other our out over own page paper part people picture place plant play point put question quick quickly quite read really right river run said same saw say school sea second see seem sentence set she should show side small so some something sometimes song soon sound spell start state still stop story study such take talk tell than that the their them then there these they thing think this those thought three through time to together too took tree try turn two under until up us use very walk want was watch water way we well went were what when where which while white who why will with without word work world would write year you young yourabout above add after again air all almost along also always America an and animal another answer any are around as ask at away back be because been before began begin being below between big book both boy but by call came can car carry change children city close come could country cut day did different do does don't down each earth eat end enough even every example eye face family far father feet few find first follow food for form found four from get girl give go good got great group grow had hand hard has have he head hear help her here high him his home house how idea if important in Indian into is it its it's just keep kind know land large last later learn leave left let letter life light like line list little live long look made make man many may me mean men might mile miss more most mother mountain move much must my name near need never new next night no not now number of off often oil old on once one only open or other our out over own page paper part people picture place plant play point put question quick quickly quite read really right river run said same saw say school sea second see seem sentence set she should show side small so some something sometimes song soon sound spell start state still stop story study such take talk tell than that the their them then there these they thing think this those thought three through time to together too took tree try turn two under until up us use very walk want was watch water way we well went were what when where which while white who why will with without word work world would write year you young your";
+var text = "about above add after again air all almost along also always America an and animal another answer any are around as ask at away back be because been before began begin being below between big book both boy but by call came can car carry change children city close come could country cut day did different do does don't down each earth eat end enough even every example eye face family far father feet few find first follow food for form found four from get girl give go good got great group grow had hand hard has have he head hear help her here high him his home house how idea if important in Indian into is it its it's just keep kind know land large last later learn leave left let letter life light like line list little live long look made make man many may me mean men might mile miss more most mother mountain move much must my name near need never new next night no not now number of off often oil old on once one only open or other our out over own page paper part people picture place plant play point put question quick quickly quite read really right river run said same saw say school sea second see seem sentence set she should show side small so some something sometimes song soon sound spell start state still stop story study such take talk tell than that the their them then there these they thing think this those thought three through time to together too took tree try turn two under until up us use very walk want was watch water way we well went were what when where which while white who why will with without word work world would write year you young your about above add after again air all almost along also always America an and animal another answer any are around as ask at away back be because been before began begin being below between big book both boy but by call came can car carry change children city close come could country cut day did different do does don't down each earth eat end enough even every example eye face family far father feet few find first follow food for form found four from get girl give go good got great group grow had hand hard has have he head hear help her here high him his home house how idea if important in Indian into is it its it's just keep kind know land large last later learn leave left let letter life light like line list little live long look made make man many may me mean men might mile miss more most mother mountain move much must my name near need never new next night no not now number of off often oil old on once one only open or other our out over own page paper part people picture place plant play point put question quick quickly quite read really right river run said same saw say school sea second see seem sentence set she should show side small so some something sometimes song soon sound spell start state still stop story study such take talk tell than that the their them then there these they thing think this those thought three through time to together too took tree try turn two under until up us use very walk want was watch water way we well went were what when where which while white who why will with without word work world would write year you young your";
 text = text.split(" ");
-for (var l = 0; l < text.length; l++) {
+/*for (var l = 0; l < text.length; l++) {
     if (text[l] == "yourabout") {
         text.splice(l, 1);
         l--;
     }
 }
+*/
 
 shuffle(text);
 
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         $(".corpus").css("color", "#f2f3f4");
         $(".changepls").css("color", "#f2f3f4");
-        $("#countdown").css("color", "#f2f3f4");
+        $("#countdown").css("color", "#f2f3f4");    
         $("#input-field").css("color", "#f2f3f4");
 
         $(".transparentpls").css("background-color", "212121");
@@ -415,11 +416,7 @@ $(document).keydown(function () {
     $('#adjusted').html(adjustWPM);
 });
 
-/*
-const globVar = window.value;
-
-function updateData(rawcpm, adjustcpm, adjustwpm, acc) {
-    const user = globVar;
+/*function updateData(rawcpm, adjustcpm, adjustwpm, acc) {
     dataBase
     .collection("users")
     .doc(user.uid)
@@ -433,8 +430,8 @@ function updateData(rawcpm, adjustcpm, adjustwpm, acc) {
         });
         console.log(dataBase.collection('users').doc(cred.user.uid));
     });
-}
-*/
+}*/
+
 
 function calc() {
     const tsection = document.querySelector(".text-content");
@@ -468,11 +465,10 @@ function calc() {
         adjustWPM = '';
     }
     */
+
     tsection.style.display = "none";
     input.style.backgroundColor = "transparent";
     $(".typing-section").removeClass("grey");
-
-    //updateData(realCPM, adjustCPM, adjustWPM, acc);
 
     acc = String(acc);
     accDisplay.innerHTML = acc + "%";

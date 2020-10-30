@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Define Chungus</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
@@ -79,29 +79,49 @@
             background-color: transparent;
             box-shadow: none;
         }
+        .navtext {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navtext a {
+            font-size: 36px;
+        }
+        nav {
+            margin-bottom: 100px;
+        }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-wrapper">
+            <ul id="nav-mobile" class="navtext hide-on-med-and-down">
+                <li>
+                  <a href="#" class="grey-text">DEFINE CHUNGUS, WHAT IS CHUNGUS?</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--
+    <nav>
+        <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li class="logged-in">
-                  <a href="#" class="grey-text modal-trigger" data-target="">Account</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
                 </li>
                 <li class="logged-in">
                   <a href="#" class="grey-text" id="logout">Logout</a>
                 </li>
                 <li class="logged-out">
-                  <a href="#" class="grey-text modal-trigger" data-target="">Login</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-login">Login</a>
                 </li>
                 <li class="logged-out">
-                  <a href="#" class="grey-text modal-trigger" data-target="">Sign up</a>
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-signup">Sign up</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- MODALS-->
     <div id="modal-signup" class="modal">
         <div class="modal-content">
           <h4>Sign up</h4><br>
@@ -142,11 +162,12 @@
         <div class="modal-content center-align">
           <h4>Account details</h4><br>
           <div class="account-details" id="account-details">
-
+              <div class="highest-wpm">Highest WPM: <span class="highest-modify"></span></div>
           </div>
           <div class="account-extras"></div>
         </div>
       </div>
+    -->
 
         <div class="row">
             <!--
