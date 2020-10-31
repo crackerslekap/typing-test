@@ -2,7 +2,7 @@ typing test
 
 todo:
 
-implement a caret/cursor on the word list
+move dom manipulation out of auth.js
 
 highlight word before submitting the word (pressing space) that indicates if it's typed wrong
 
