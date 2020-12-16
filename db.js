@@ -4,35 +4,38 @@ const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 function submitTest(rawcpm, adjustedcpm, adjustedwpm, accuracy, dur, autocorrect) {
     user = firebase.auth().currentUser;
 
-   if(dur == 15 && autocorrect == 0) {
-        db.collection('users').doc(user.uid).collection('scores').doc('15').update({
+    if(user != null) {
+        if(dur == 15 && autocorrect == 0) {
+            db.collection('users').doc(user.uid).collection('scores').doc('15').update({
+                rawCPMs: arrayUnion(rawcpm),
+                adjustWPMs: arrayUnion(adjustedwpm),
+                adjustCPMs: arrayUnion(adjustedcpm),
+                accs: arrayUnion(accuracy)
+            });
+       } else if (dur == 30 && autocorrect == 0) {
+            db.collection('users').doc(user.uid).collection('scores').doc('30').update({
+                rawCPMs: arrayUnion(rawcpm),
+                adjustWPMs: arrayUnion(adjustedwpm),
+                adjustCPMs: arrayUnion(adjustedcpm),
+                accs: arrayUnion(accuracy)
+            });
+       } else if (dur == 60 && autocorrect == 0) {
+            db.collection('users').doc(user.uid).collection('scores').doc('60').update({
             rawCPMs: arrayUnion(rawcpm),
             adjustWPMs: arrayUnion(adjustedwpm),
             adjustCPMs: arrayUnion(adjustedcpm),
             accs: arrayUnion(accuracy)
         });
-   } else if (dur == 30 && autocorrect == 0) {
-        db.collection('users').doc(user.uid).collection('scores').doc('30').update({
-            rawCPMs: arrayUnion(rawcpm),
-            adjustWPMs: arrayUnion(adjustedwpm),
-            adjustCPMs: arrayUnion(adjustedcpm),
-            accs: arrayUnion(accuracy)
-        });
-   } else if (dur == 60 && autocorrect == 0) {
-        db.collection('users').doc(user.uid).collection('scores').doc('60').update({
-        rawCPMs: arrayUnion(rawcpm),
-        adjustWPMs: arrayUnion(adjustedwpm),
-        adjustCPMs: arrayUnion(adjustedcpm),
-        accs: arrayUnion(accuracy)
-    });
-   } else if (dur == 120 && autocorrect == 0) {
-        db.collection('users').doc(user.uid).collection('scores').doc('120').update({
-            rawCPMs: arrayUnion(rawcpm),
-            adjustWPMs: arrayUnion(adjustedwpm),
-            adjustCPMs: arrayUnion(adjustedcpm),
-            accs: arrayUnion(accuracy)
-        });
-   }
+       } else if (dur == 120 && autocorrect == 0) {
+            db.collection('users').doc(user.uid).collection('scores').doc('120').update({
+                rawCPMs: arrayUnion(rawcpm),
+                adjustWPMs: arrayUnion(adjustedwpm),
+                adjustCPMs: arrayUnion(adjustedcpm),
+                accs: arrayUnion(accuracy)
+            });
+       }
+    }
+
    updateResults();
 }
 

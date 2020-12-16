@@ -438,7 +438,6 @@ function calc() {
     */
 
 
-
    submitTest(realCPM, adjustCPM, adjustWPM, acc, durationSetting, autocorrect);
 }
 
