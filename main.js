@@ -409,7 +409,7 @@ const tsection = document.querySelector(".text-content");
 const input = document.querySelector(".input");
 
 function calc() {
-    document.getElementById("countdown").style.display = "none";
+    countdown.style.display = "none";
     acc = (incorrect / correct) * 100;
     acc = 100 - acc;
     acc = Math.round(acc);
@@ -458,6 +458,7 @@ function updateResults() {
     tsection.style.display = "none";
     input.style.backgroundColor = "transparent";
     $(".typing-section").removeClass("grey");
+    $(".typing-section").css("height", "0");
 
     acc = String(acc);
     accDisplay.innerHTML = acc + "%";

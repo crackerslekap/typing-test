@@ -2,7 +2,14 @@
 body {
     background-color: #f2f3f4;
     font-family: 'Montserrat', sans-serif;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
+
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
 .container {
     min-height: 100%;
     align-items: center;
@@ -17,6 +24,10 @@ body {
     background-color: inherit;
     height: 57.9375px;
     margin: 25px;
+}
+
+.parent {
+    margin-bottom: 50px;
 }
 .input {
     margin-top: 25px;
@@ -83,4 +94,8 @@ nav {
 }
 .modal {
     max-height: 75%;
+}
+
+.buttons {
+    margin: 50px;
 }
