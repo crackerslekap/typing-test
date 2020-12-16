@@ -10,6 +10,11 @@ text = text.split(" ");
 */
 
 shuffle(text);
+for (var l = 0; l < 500; l++) {
+    var item = text[Math.floor(Math.random() * text.length)];
+    text.push(item);
+}
+console.log(text);
 
 for (var n = 0; n < text.length; n++) {
     let parent = document.getElementById("text-content");
