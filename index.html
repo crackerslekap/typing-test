@@ -23,6 +23,9 @@
     <nav>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li>
+                  <a href="#" class="grey-text modal-trigger" data-target="modal-lb">Leaderboard</a>
+                </li>
                 <li class="logged-in">
                   <a href="#" class="grey-text modal-trigger" data-target="modal-account">Account</a>
                 </li>
@@ -43,6 +46,10 @@
         <div class="modal-content">
           <h4>Sign up</h4><br>
           <form id="signup-form">
+            <div class="input-field">
+              <input type="text" id="signup-user" required />
+              <label for="signup-user">Username</label>
+            </div>
             <div class="input-field">
               <input type="email" id="signup-email" required />
               <label for="signup-email">Email address</label>
@@ -72,6 +79,30 @@
             <button class="btn teal lighten-1 z-depth-0">Login</button>
             <div class="red-text lighten-2" id="loginMsgDiv"></div>
           </form>
+        </div>
+      </div>
+
+      <div id="modal-lb" class="modal">
+        <div class="modal-content center-align">
+          <h4 class="center-align">Leaderboard</h4><br>
+          <div class="durSelection">
+            <button class="btn btn-large waves-effect waves-light teal lighten-1 lb-15">15s</button>
+            <button class="btn btn-large waves-effect waves-light teal lighten-1 lb-30">30s</button>
+            <button class="btn btn-large waves-effect waves-light teal lighten-1 lb-60">60s</button>
+            <button class="btn btn-large waves-effect waves-light teal lighten-1 lb-120">120s</button>
+        </div>
+          <div class="leaderboard-list">
+            <table class="striped centered">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Raw WPM</th>
+                  <th>Adjusted WPM</th>
+                  <th>Accuracy</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
         </div>
       </div>
     

@@ -18,25 +18,29 @@ function createDocs(cred) {
         rawCPMs: [],
         adjustWPMs: [],
         adjustCPMs: [],
-        accs: []
+        accs: [],
+        durSetting: '15'
     });
     db.collection('users').doc(cred.user.uid).collection('scores').doc('30').set({
         rawCPMs: [],
         adjustWPMs: [],
         adjustCPMs: [],
-        accs: []
+        accs: [],
+        durSetting: '30'
     });
     db.collection('users').doc(cred.user.uid).collection('scores').doc('60').set({
         rawCPMs: [],
         adjustWPMs: [],
         adjustCPMs: [],
-        accs: []
+        accs: [],
+        durSetting: '60'
     });
     db.collection('users').doc(cred.user.uid).collection('scores').doc('120').set({
         rawCPMs: [],
         adjustWPMs: [],
         adjustCPMs: [],
-        accs: []
+        accs: [],
+        durSetting: '120'
     });
 }
 
@@ -47,36 +51,46 @@ signupForm.addEventListener('submit', (e) => {
 
     const email = signupForm['signup-email'].value;
     const password = signupForm['signup-password'].value;
+    const username = signupForm['signup-user'].value;
 
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         return db.collection('users').doc(cred.user.uid).set({
             username: signupForm['signup-email'].value,
+            ign: signupForm['signup-user'].value
         });
     }).then(() => {
         let user = auth.currentUser;
         db.collection('users').doc(user.uid).collection('scores').doc('15').set({
+            username: username,
             rawCPMs: [],
             adjustWPMs: [],
             adjustCPMs: [],
-            accs: []
+            accs: [],
+            durSetting: '15'
         });
         db.collection('users').doc(user.uid).collection('scores').doc('30').set({
+            username: username,
             rawCPMs: [],
             adjustWPMs: [],
             adjustCPMs: [],
-            accs: []
+            accs: [],
+            durSetting: '30'
         });
         db.collection('users').doc(user.uid).collection('scores').doc('60').set({
+            username: username,
             rawCPMs: [],
             adjustWPMs: [],
             adjustCPMs: [],
-            accs: []
+            accs: [],
+            durSetting: '60'
         });
         db.collection('users').doc(user.uid).collection('scores').doc('120').set({
+            username: username,
             rawCPMs: [],
             adjustWPMs: [],
             adjustCPMs: [],
-            accs: []
+            accs: [],
+            durSetting: '120'
         });
         const modal = document.querySelector('#modal-signup');
         M.Modal.getInstance(modal).close();

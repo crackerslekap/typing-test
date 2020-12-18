@@ -1,13 +1,6 @@
 //TEXT INITIALISATION
 var text = "power list spite life talk ones lines real sail most more moves notes nose past realm hear nations last walk house move team pages live have lives rain going fail doing ours reality person those sometimes late near note law things hate ship realize images around learn calm mortal poets";
 text = text.split(" ");
-/*for (var l = 0; l < text.length; l++) {
-    if (text[l] == "yourabout") {
-        text.splice(l, 1);
-        l--;
-    }
-}
-*/
 
 shuffle(text);
 for (var l = 0; l < 500; l++) {
@@ -15,6 +8,8 @@ for (var l = 0; l < 500; l++) {
     text.push(item);
 }
 console.log(text);
+
+
 
 for (var n = 0; n < text.length; n++) {
     let parent = document.getElementById("text-content");
@@ -446,13 +441,26 @@ document.querySelector(".acct-15").addEventListener("click", function pre() {
 });
 document.querySelector(".acct-30").addEventListener("click", function pre() {
     updateDisplay(30);
-})
+});
 document.querySelector(".acct-60").addEventListener("click", function pre() {
     updateDisplay(60);
-})
+});
 document.querySelector(".acct-120").addEventListener("click", function pre() {
     updateDisplay(120);
-})
+});
+
+document.querySelector(".lb-15").addEventListener("click", function pre() {
+    updateLb(15);
+});
+document.querySelector(".lb-30").addEventListener("click", function pre() {
+    updateLb(30);
+});
+document.querySelector(".lb-60").addEventListener("click", function pre() {
+    updateLb(60);
+});
+document.querySelector(".lb-120").addEventListener("click", function pre() {
+    updateLb(120);
+});
 
 function updateResults() {
     tsection.style.display = "none";
