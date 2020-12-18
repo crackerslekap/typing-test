@@ -109,10 +109,12 @@ function lbCont(itemArr, durSetting) {
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
+                        innerParent.setAttribute("myAttribute", adjustWpm);
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
                         innerParent.setAttribute("class", item.username);
+                        innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
                     } else {
                         container.innerHTML = "";
@@ -121,23 +123,6 @@ function lbCont(itemArr, durSetting) {
 
             }
         });
-
-        /*
-
-        for(var r = wpmArr.length - 1; r >= 0; r--) {
-            var innerParent = document.createElement("tr");
-            var recentRawElem = document.createElement("td");
-            var recentWpmElem = document.createElement("td");
-            var recentAccElem = document.createElement("td");
-            recentRawElem.innerHTML = Math.round(rawArr[r] / 5);
-            recentWpmElem.innerHTML = wpmArr[r];
-            recentAccElem.innerHTML = accArr[r];
-            innerParent.appendChild(recentRawElem);
-            innerParent.appendChild(recentWpmElem);
-            innerParent.appendChild(recentAccElem);
-            container.appendChild(innerParent);
-        }
-        */
 
 
     } else if(durSetting == 30) {
@@ -168,10 +153,12 @@ function lbCont(itemArr, durSetting) {
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
+                        innerParent.setAttribute("myAttribute", adjustWpm);
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
                         innerParent.setAttribute("class", item.username);
+                        innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
                     } else {
                         container.innerHTML = "";
@@ -210,10 +197,12 @@ function lbCont(itemArr, durSetting) {
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
+                        innerParent.setAttribute("myAttribute", adjustWpm);
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
                         innerParent.setAttribute("class", item.username);
+                        innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
                     } else {
                         container.innerHTML = "";
@@ -251,10 +240,12 @@ function lbCont(itemArr, durSetting) {
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
+                        innerParent.setAttribute("myAttribute", adjustWpm);
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
                         innerParent.setAttribute("class", item.username);
+                        innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
                     } else {
                         container.innerHTML = "";
@@ -265,7 +256,18 @@ function lbCont(itemArr, durSetting) {
         });
 
     }
+    var tb = $('.lb-parent');
+    var rows = tb.find('tr');
+    rows.sort(function(a, b) {
+        var keyA = $(a).attr('myAttribute');
+        var keyB = $(b).attr('myAttribute');
+        return keyB - keyA;
+    });
+    $.each(rows, function(index, row) {
+        tb.append(row);
+    });
 }
+
 
 /*
 db.collection("users").get().then((doc) => {
