@@ -101,11 +101,14 @@ function lbCont(itemArr, durSetting) {
                         var userElem = document.createElement("td");
                         var rawElem = document.createElement("td");
                         var adjustElem = document.createElement("td");
+                        var accElem = document.createElement("td");
 
                         var adjustWpm = Math.max(...item.adjustWPMs);
                         var tempAdjIndex = item.adjustWPMs.indexOf(adjustWpm);
                         var rawWpm = item.rawCPMs[tempAdjIndex] / 5;
+                        var acc = item.accs[tempAdjIndex];
 
+                        accElem.innerHTML = acc;
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
@@ -113,6 +116,7 @@ function lbCont(itemArr, durSetting) {
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
+                        innerParent.appendChild(accElem);
                         innerParent.setAttribute("class", item.username);
                         innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
@@ -145,11 +149,14 @@ function lbCont(itemArr, durSetting) {
                         var innerParent = document.createElement("tr");
                         var userElem = document.createElement("td");
                         var rawElem = document.createElement("td");
-                        
+                        var accElem = document.createElement("td");
+
                         var adjustWpm = Math.max(...item.adjustWPMs);
                         var tempAdjIndex = item.adjustWPMs.indexOf(adjustWpm);
                         var rawWpm = item.rawCPMs[tempAdjIndex] / 5;
+                        var acc = item.accs[tempAdjIndex];
                         
+                        accElem.innerHTML = acc;
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
@@ -157,6 +164,7 @@ function lbCont(itemArr, durSetting) {
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
+                        innerParent.appendChild(accElem);
                         innerParent.setAttribute("class", item.username);
                         innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
@@ -189,11 +197,14 @@ function lbCont(itemArr, durSetting) {
                         var userElem = document.createElement("td");
                         var rawElem = document.createElement("td");
                         var adjustElem = document.createElement("td");
-                        
+                        var accElem = document.createElement("td");
+
                         var adjustWpm = Math.max(...item.adjustWPMs);
                         var tempAdjIndex = item.adjustWPMs.indexOf(adjustWpm);
                         var rawWpm = item.rawCPMs[tempAdjIndex] / 5;
-                        
+                        var acc = item.accs[tempAdjIndex];
+
+                        accElem.innerHTML = acc;
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
@@ -201,6 +212,7 @@ function lbCont(itemArr, durSetting) {
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
+                        innerParent.appendChild(accElem);
                         innerParent.setAttribute("class", item.username);
                         innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
@@ -232,11 +244,14 @@ function lbCont(itemArr, durSetting) {
                         var userElem = document.createElement("td");
                         var rawElem = document.createElement("td");
                         var adjustElem = document.createElement("td");
-                        
+                        var accElem = document.createElement("td");
+
                         var adjustWpm = Math.max(...item.adjustWPMs);
                         var tempAdjIndex = item.adjustWPMs.indexOf(adjustWpm);
                         var rawWpm = item.rawCPMs[tempAdjIndex] / 5;
-                        
+                        var acc = item.accs[tempAdjIndex];
+
+                        accElem.innerHTML = acc;
                         userElem.innerHTML = item.username;
                         rawElem.innerHTML = rawWpm;
                         adjustElem.innerHTML = adjustWpm;
@@ -244,6 +259,7 @@ function lbCont(itemArr, durSetting) {
                         innerParent.appendChild(userElem);
                         innerParent.appendChild(rawElem);
                         innerParent.appendChild(adjustElem);
+                        innerParent.appendChild(accElem);
                         innerParent.setAttribute("class", item.username);
                         innerParent.setAttribute("id", "item");
                         container.appendChild(innerParent);
