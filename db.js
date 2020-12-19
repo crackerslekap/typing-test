@@ -149,6 +149,7 @@ function lbCont(itemArr, durSetting) {
                         var innerParent = document.createElement("tr");
                         var userElem = document.createElement("td");
                         var rawElem = document.createElement("td");
+                        var adjustElem = document.createElement("td");
                         var accElem = document.createElement("td");
 
                         var adjustWpm = Math.max(...item.adjustWPMs);
