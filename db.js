@@ -3,7 +3,7 @@ const arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
 function submitTest(rawcpm, adjustedcpm, adjustedwpm, accuracy, dur, autocorrect) {
     user = firebase.auth().currentUser;
-
+    
     if(user != null) {
         if(dur == 15 && autocorrect == 0) {
             db.collection('users').doc(user.uid).collection('scores').doc('15').update({

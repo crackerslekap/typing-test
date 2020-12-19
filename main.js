@@ -320,6 +320,7 @@ var chungus;
 function start() {
     inputField.removeEventListener("keypress", start);
     inputField.addEventListener("keypress", check);
+    $(".autocorrect").addClass("disabled");
     var timer = durationSetting * 1000;
     chungus = durationSetting;
     var countdown = setInterval(function () {
@@ -432,6 +433,7 @@ function calc() {
     }
     */
 
+    $(".autocorrect").removeClass("disabled");
 
    submitTest(realCPM, adjustCPM, adjustWPM, acc, durationSetting, autocorrect);
 }
