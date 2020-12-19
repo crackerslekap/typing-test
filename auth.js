@@ -53,52 +53,58 @@ signupForm.addEventListener('submit', (e) => {
     const password = signupForm['signup-password'].value;
     const username = signupForm['signup-user'].value;
 
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        return db.collection('users').doc(cred.user.uid).set({
-            username: signupForm['signup-email'].value,
-            ign: signupForm['signup-user'].value
+    console.log(username);
+    if(username.indexOf(' ') !== -1) {
+        errMsgDiv.innerHTML = "Username cannot have space.";
+    } else {
+        errMsgDiv.innerHTML = "";
+        auth.createUserWithEmailAndPassword(email, password).then(cred => {
+            return db.collection('users').doc(cred.user.uid).set({
+                username: signupForm['signup-email'].value,
+                ign: signupForm['signup-user'].value
+            });
+        }).then(() => {
+            let user = auth.currentUser;
+            db.collection('users').doc(user.uid).collection('scores').doc('15').set({
+                username: username,
+                rawCPMs: [],
+                adjustWPMs: [],
+                adjustCPMs: [],
+                accs: [],
+                durSetting: '15'
+            });
+            db.collection('users').doc(user.uid).collection('scores').doc('30').set({
+                username: username,
+                rawCPMs: [],
+                adjustWPMs: [],
+                adjustCPMs: [],
+                accs: [],
+                durSetting: '30'
+            });
+            db.collection('users').doc(user.uid).collection('scores').doc('60').set({
+                username: username,
+                rawCPMs: [],
+                adjustWPMs: [],
+                adjustCPMs: [],
+                accs: [],
+                durSetting: '60'
+            });
+            db.collection('users').doc(user.uid).collection('scores').doc('120').set({
+                username: username,
+                rawCPMs: [],
+                adjustWPMs: [],
+                adjustCPMs: [],
+                accs: [],
+                durSetting: '120'
+            });
+            const modal = document.querySelector('#modal-signup');
+            M.Modal.getInstance(modal).close();
+            signupForm.reset();
+            window.location.reload();
+        }).catch((err) => {
+            errMsgDiv.innerHTML = (err.message);
         });
-    }).then(() => {
-        let user = auth.currentUser;
-        db.collection('users').doc(user.uid).collection('scores').doc('15').set({
-            username: username,
-            rawCPMs: [],
-            adjustWPMs: [],
-            adjustCPMs: [],
-            accs: [],
-            durSetting: '15'
-        });
-        db.collection('users').doc(user.uid).collection('scores').doc('30').set({
-            username: username,
-            rawCPMs: [],
-            adjustWPMs: [],
-            adjustCPMs: [],
-            accs: [],
-            durSetting: '30'
-        });
-        db.collection('users').doc(user.uid).collection('scores').doc('60').set({
-            username: username,
-            rawCPMs: [],
-            adjustWPMs: [],
-            adjustCPMs: [],
-            accs: [],
-            durSetting: '60'
-        });
-        db.collection('users').doc(user.uid).collection('scores').doc('120').set({
-            username: username,
-            rawCPMs: [],
-            adjustWPMs: [],
-            adjustCPMs: [],
-            accs: [],
-            durSetting: '120'
-        });
-        const modal = document.querySelector('#modal-signup');
-        M.Modal.getInstance(modal).close();
-        signupForm.reset();
-        window.location.reload();
-    }).catch((err) => {
-        errMsgDiv.innerHTML = (err.message);
-    });
+    }
 });
 
 const loginForm = document.querySelector('#login-form');
