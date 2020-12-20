@@ -405,10 +405,12 @@ const tsection = document.querySelector(".text-content");
 const input = document.querySelector(".input");
 
 function calc() {
+    inputField.removeEventListener("keypress", start);
     countdown.style.display = "none";
     acc = (incorrect / correct) * 100;
     acc = 100 - acc;
     acc = Math.round(acc);
+    console.log(acc);
     /*
     lengthOfIncorrect = incorrect * 5;
     adjustedCpm = cpm - lengthOfIncorrect;
